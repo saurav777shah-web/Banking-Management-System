@@ -1,24 +1,21 @@
-// =============================================================================
-// OWNER : Dev 1 — Database & Models
-// FILE  : include/models/account.h
-// ABOUT : Account struct and all CRUD helpers for the `accounts` table.
-//         Account numbers are generated here (e.g. "ACC000001").
-//
-// MUST PROVIDE:
-//   struct Account
-//     - int id
-//     - int user_id
-//     - std::string account_number
-//     - double balance
-//     - std::string created_at
-//
-//   namespace AccountModel
-//     - Account                create(DB&, int user_id)
-//     - std::optional<Account> findByUserId(DB&, int user_id)
-//     - std::optional<Account> findByAccountNumber(DB&, const std::string&)
-//     - bool                   updateBalance(DB&, int account_id, double new_balance)
-//     - std::vector<Account>   findAll(DB&)
-//
-// DEPENDENCIES: db.h
-// =============================================================================
 #pragma once
+#include <string>
+#include <optional>
+#include <vector>
+#include "database/db.h"
+
+struct Account {
+    int         id             = 0;
+    int         user_id        = 0;
+    std::string account_number;
+    double      balance        = 0.0;
+    std::string created_at;
+};
+
+namespace AccountModel {
+    Account                create              (DB& db, int user_id);
+    std::optional<Account> findByUserId        (DB& db, int user_id);
+    std::optional<Account> findByAccountNumber (DB& db, const std::string& account_number);
+    bool                   updateBalance       (DB& db, int account_id, double new_balance);
+    std::vector<Account>   findAll             (DB& db);
+}

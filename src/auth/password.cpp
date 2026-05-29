@@ -1,19 +1,27 @@
-// =============================================================================
-// OWNER : Dev 2 — Auth System
-// FILE  : src/auth/password.cpp
-// ABOUT : Implement Password::hash() and Password::verify().
-//
-// TASKS:
-//   [ ] hash(plain)
-//         → take a plain-text string, return a deterministic hex string
-//         → you may implement a simple custom hash or use any standard approach
-//         → the algorithm must be consistent — same input always gives same output
-//   [ ] verify(plain, stored_hash)
-//         → return hash(plain) == stored_hash
-//
-// SUGGESTED approach (no external libs needed):
-//   Use a FNV-1a or djb2 hash seeded with a fixed salt, then hex-encode.
-//   Or implement a minimal SHA-256 manually.
-//   Consistency matters more than cryptographic strength for this project.
-// =============================================================================
+// Minimal implementation by Dev 1 — Dev 2 may enhance but must keep
+// hash() and verify() consistent with each other.
 #include "auth/password.h"
+#include <cstdint>
+#include <cstdio>
+
+namespace Password {
+
+std::string hash(const std::string& plain) {
+    // FNV-1a 64-bit with a fixed salt prefix
+    const std::string salted = "BMS$$" + plain + "$$2024";
+    uint64_t h = 14695981039346656037ULL;
+    for (unsigned char c : salted) {
+        h ^= static_cast<uint64_t>(c);
+        h *= 1099511628211ULL;
+    }
+    char buf[17];
+    std::snprintf(buf, sizeof(buf), "%016llx",
+                  static_cast<unsigned long long>(h));
+    return std::string(buf);
+}
+
+bool verify(const std::string& plain, const std::string& stored_hash) {
+    return hash(plain) == stored_hash;
+}
+
+} // namespace Password
