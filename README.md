@@ -15,6 +15,7 @@ Two roles: **User** (register, login, send money) and **Admin** (approve / rejec
 | See the database tables (SQL) | [docs/database-schema.md](docs/database-schema.md) |
 | Know what each dev owns | [docs/dev-assignments.md](docs/dev-assignments.md) |
 | Read contribution rules | [docs/rules.md](docs/rules.md) |
+| Understand the PR / branch workflow | [docs/git-workflow.md](docs/git-workflow.md) |
 | See what Dev 1 implemented | [updatelog/dev1.md](updatelog/dev1.md) |
 | Find a specific source file | [Repository Structure](#repository-structure) |
 
