@@ -5,6 +5,7 @@ build/
 *.a
 .vscode/
 .claude/
+notes/
 
 # Keep bundled SQLite source
 !lib/sqlite3/sqlite3.c
