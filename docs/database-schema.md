@@ -3,6 +3,8 @@
 All tables live in a single file: `banking.db` (created at runtime in the
 working directory). Dev 1 owns the creation SQL in `src/database/schema.cpp`.
 
+> **Visual ERD with cardinality and constraint table** → [diagrams.md § 1](diagrams.md#1-entity-relationship-diagram-erd)
+
 ---
 
 ## Table: users
@@ -79,3 +81,6 @@ users ──< accounts ──< transactions (from_account_id)
                    ──< transactions (to_account_id)
 users ──< transactions (reviewed_by)
 ```
+
+For the full annotated ERD with cardinality labels and a constraint table
+see [diagrams.md § 1](diagrams.md#1-entity-relationship-diagram-erd).

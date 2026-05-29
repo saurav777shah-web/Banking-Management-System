@@ -1,5 +1,8 @@
 # System Architecture
 
+> **Visual diagrams** (ERD, struct diagram, module dependency map, call chains)
+> are in [diagrams.md](diagrams.md). Read that alongside this document.
+
 ## Table of Contents
 1. [Project Overview](#1-project-overview)
 2. [Tech Stack](#2-tech-stack)
@@ -153,6 +156,8 @@ directly below it — never skip a layer or talk sideways.
 ---
 
 ## 5. Module Breakdown
+> Module dependency diagram (who calls whom) → [diagrams.md § 3](diagrams.md#3-module-dependency-diagram)
+> Layer & ownership map → [diagrams.md § 4](diagrams.md#4-layer--ownership-map)
 
 ### `database/` — DB Wrapper (Dev 1)
 **Entry point for the entire codebase.** Everything starts with `DB db("banking.db")`.
@@ -272,6 +277,7 @@ reach back up the chain. Circular includes will cause compile errors.
 ---
 
 ## 7. Data Flow — Every Operation
+> Step-by-step call chain diagrams with exact DB queries → [diagrams.md § 5–8](diagrams.md#5-call-chain--register)
 
 ### Register
 ```

@@ -11,7 +11,8 @@ Two roles: **User** (register, login, send money) and **Admin** (approve / rejec
 |------------|-------|
 | Build and run the project | [Build Guide](#build--run) |
 | Understand the full system design | [docs/architecture.md](docs/architecture.md) |
-| See the database tables | [docs/database-schema.md](docs/database-schema.md) |
+| See ERD, class diagrams, call chains | [docs/diagrams.md](docs/diagrams.md) |
+| See the database tables (SQL) | [docs/database-schema.md](docs/database-schema.md) |
 | Know what each dev owns | [docs/dev-assignments.md](docs/dev-assignments.md) |
 | Read contribution rules | [docs/rules.md](docs/rules.md) |
 | See what Dev 1 implemented | [updatelog/dev1.md](updatelog/dev1.md) |
