@@ -14,3 +14,4 @@ if %ERRORLEVEL% neq 0 (echo Build failed & exit /b 1)
 
 echo.
 echo Build successful! Run: build\banking_system.exe
+`
