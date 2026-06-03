@@ -72,6 +72,10 @@ bool Auth::loginUser(DB& db,
         session_data.account_id = 0;
     } else {
         auto account = AccountModel::findByUserId(db, user->id);
+        if (!account) {
+            std::cerr << "Error: user has no account.\n";
+            return false;
+        }
         session_data.account_id = account->id;
     }
 
