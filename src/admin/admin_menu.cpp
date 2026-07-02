@@ -19,9 +19,40 @@
 //   [ ] Handle invalid input gracefully
 // =============================================================================
 #include "admin/admin_menu.h"
+#include "admin/approval.h"
+#include "admin/user_mgmt.h"
 #include "database/db.h"
 #include "auth/session.h"
+#include <iostream>
+#include <string>
 
 void AdminMenu::run(DB& db) {
-    // Stub for Dev 4 implementation
+    auto session = Session::current();
+    std::cout << "\nWelcome, Admin " << session.username << "\n";
+
+    while (true) {
+        std::cout << "\n=== Admin Menu ===\n";
+        std::cout << "1. View Pending Transactions\n";
+        std::cout << "2. Approve / Reject a Transaction\n";
+        std::cout << "3. View All Users & Accounts\n";
+        std::cout << "4. Logout\n";
+        std::cout << "> ";
+
+        std::string choice;
+        std::getline(std::cin, choice);
+
+        if (choice == "1") {
+            Approval::listPending(db);
+        } else if (choice == "2") {
+            Approval::reviewTransaction(db);
+        } else if (choice == "3") {
+            UserMgmt::listAllUsers(db);
+        } else if (choice == "4") {
+            Session::end();
+            std::cout << "Logged out." << std::endl;
+            break;
+        } else {
+            std::cout << "Invalid option. Try again." << std::endl;
+        }
+    }
 }
