@@ -37,6 +37,7 @@
 #include "models/transaction.h"
 #include "models/user.h"
 #include <cctype>
+#include <cstddef>
 #include <iostream>
 #include <iomanip>
 #include <optional>
@@ -108,7 +109,7 @@ void listPending(DB& db) {
     std::cout << "\nID    | Date                | From Account | To Account   | Amount     | Note\n";
     std::cout << "------+---------------------+--------------+--------------+------------+---------------------------\n";
 
-    for (size_t idx = 0; idx < pending.size(); ++idx) {
+    for (std::size_t idx = 0; idx < pending.size(); ++idx) {
         const Transaction& txn = pending[idx];
         std::optional<Account> from_account = findAccountById(db, txn.from_account_id);
         std::optional<Account> to_account   = findAccountById(db, txn.to_account_id);
@@ -128,6 +129,11 @@ void listPending(DB& db) {
 
 void reviewTransaction(DB& db) {
     listPending(db);
+
+    auto pending = TransactionModel::findPending(db);
+    if (pending.empty()) {
+        return;
+    }
 
     std::cout << "\nEnter Transaction ID to review (0 to cancel): ";
     std::string input;

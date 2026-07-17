@@ -18,7 +18,6 @@
 
 
 
-
 #include "admin/user_mgmt.h"
 #include "models/user.h"
 #include "models/account.h"
@@ -43,18 +42,17 @@ void UserMgmt::listAllUsers(DB& db) {
                   << "| " << std::setw(9)  << user.username;
                   
         if (user.role == "admin") {
-            std::cout << "| " << std::setw(12) << "-" 
-                      << "| " << std::setw(11) << "-";
+            std::cout << "| " << std::setw(12) << "—"
+                      << "| " << std::setw(11) << "—";
         } else {
             auto acc = AccountModel::findByUserId(db, user.id);
-            
-            // Unpack the std::optional using the arrow (->) operator safely
+
             if (acc.has_value()) {
                 std::cout << "| " << std::setw(12) << acc->account_number
                           << "| $" << std::fixed << std::setprecision(2) << std::setw(9) << acc->balance;
             } else {
-                std::cout << "| " << std::setw(12) << "NO ACCOUNT"
-                          << "| " << std::setw(11) << "0.00";
+                std::cout << "| " << std::setw(12) << "—"
+                          << "| " << std::setw(11) << "—";
             }
         }
         

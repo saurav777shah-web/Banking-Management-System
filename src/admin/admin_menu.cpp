@@ -26,6 +26,15 @@
 #include <iostream>
 #include <string>
 
+static std::string trim(const std::string& input) {
+    const auto start = input.find_first_not_of(" \t\r\n");
+    if (start == std::string::npos) {
+        return "";
+    }
+    const auto end = input.find_last_not_of(" \t\r\n");
+    return input.substr(start, end - start + 1);
+}
+
 void AdminMenu::run(DB& db) {
     auto session = Session::current();
     std::cout << "\nWelcome, Admin " << session.username << "\n";
@@ -40,6 +49,7 @@ void AdminMenu::run(DB& db) {
 
         std::string choice;
         std::getline(std::cin, choice);
+        choice = trim(choice);
 
         if (choice == "1") {
             Approval::listPending(db);
